@@ -1,0 +1,62 @@
+<div class="modules-page-container">
+    <div class="modules-card">
+        <div class="rutasys-header">
+            <h1>RUTASYS</h1>
+        </div>
+
+        <!-- 1. Muestra esto mientras se cargan los datos (loading es true) -->
+        <div *ngIf="loading" class="text-center p-8">
+            <p>Cargando perfiles...</p>
+        </div>
+
+        <!-- 2. Muestra esto si la carga terminó (loading es false) pero la lista está vacía -->
+        <div *ngIf="!loading && users.length === 0" class="text-center p-8">
+            <p>No se encontraron perfiles o roles disponibles para este usuario.</p>
+        </div>
+        
+        <!-- Mensaje de Error de Ingreso -->
+        <div *ngIf="ingresoError" class="error-message-box">
+            <p>{{ ingresoError }}</p>
+        </div>
+        
+
+        <!-- 3. Muestra la cuadrícula de usuarios solo si la carga terminó y hay datos -->
+        <div class="users-grid" *ngIf="!loading && users.length > 0">
+            <div class="user-item-wrapper" *ngFor="let user of users">
+                <div class="user-card">
+                    <img [src]="user.avatarUrl" [alt]="'Avatar de ' + user.name" class="user-avatar">
+                    <h3>{{ user.name }}</h3>
+                    <p>{{ user.role }}</p>
+                </div>
+                
+                <!-- ⬅️ NUEVA LÓGICA: Mostrar el botón solo si el ID del perfil coincide con el ID del usuario actual -->
+                <button 
+                    *ngIf="user.usuarioId === currentUserId"
+                    class="btn-ingresar" 
+                    (click)="ingresarComoUsuario(user); $event.stopPropagation()">
+                    Ingresar
+                </button>
+            </div>
+
+        </div>
+        
+        <!-- ... (resto del footer) ... -->
+
+        <div class="modules-footer">
+            <a class="footer-link">
+                <i class="fa-solid fa-question"></i>
+                Ayuda
+            </a>
+            <a class="footer-link" (click)="cerrarSesion()">
+                <i class="fa-solid fa-arrow-left"></i>
+                Cerrar sesión
+            </a>
+        </div>
+
+        <div class="debug-text">
+            
+        </div>
+
+    </div>
+
+</div>

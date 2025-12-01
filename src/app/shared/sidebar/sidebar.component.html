@@ -1,0 +1,79 @@
+<aside class="sidebar-container">
+    
+    <div class="profile-section">
+        <img [src]="profileImageUrl" alt="Foto de perfil" class="profile-image">
+        <h2 class="user-name">{{ userName }}</h2>
+        <p class="user-role">{{ userRole }}</p>
+    </div>
+
+    <div class="separator"></div>
+
+    <nav class="menu-list">
+
+        <ng-container *ngIf="!activeModule">
+            <a *ngFor="let item of mainMenuItems" 
+               (click)="navigate(item.route)" 
+               class="menu-item"
+               href="javascript:void(0);">
+                
+                <div class="icon-square">
+                    <i [class]="'fa-solid ' + item.icon"></i> 
+                </div>
+                <div class="text-group">
+                    <span class="title">{{ item.title }}</span>
+                    <span class="description">{{ item.description }}</span>
+                </div>
+            </a>
+        </ng-container>
+
+        <ng-container *ngIf="activeModule">
+            
+            <div class="module-header-card">
+                <div class="icon-square">
+                    <i [class]="'fa-solid ' + activeModule.icon"></i>
+                </div>
+                <span class="module-title">{{ activeModule.title }}</span>
+            </div>
+
+            <div class="sub-options-list">
+                <a *ngFor="let subItem of activeModule.subOptions"
+                   (click)="navigate(subItem.route)"
+                   [routerLink]="subItem.route" 
+                   routerLinkActive="active-pill"
+                   [routerLinkActiveOptions]="{ exact: true }"
+                   class="sub-item-pill"
+                   href="javascript:void(0);">
+                   
+                   <i [class]="'fa-solid ' + subItem.icon"></i>
+                   <span>{{ subItem.title }}</span>
+                </a>
+            </div>
+
+        </ng-container>
+
+    </nav>
+
+    <div class="bottom-actions">
+        
+        <a (click)="handleHelp()" class="menu-item bottom-link">
+            <div class="icon-square"><i class="fa-solid fa-circle-question"></i></div>
+            <span class="title">Ayuda</span>
+        </a>
+
+        <a *ngIf="!activeModule" 
+           (click)="handleLogout()" 
+           class="menu-item bottom-link logout-link">
+            <div class="icon-square"><i class="fa-solid fa-right-from-bracket"></i></div>
+            <span class="title">Cerrar Sesión</span>
+        </a>
+
+        <a *ngIf="activeModule" 
+           (click)="handleBack()" 
+           class="menu-item bottom-link back-link">
+            <div class="icon-square"><i class="fa-solid fa-arrow-left"></i></div>
+            <span class="title">Volver</span>
+        </a>
+
+    </div>
+
+</aside>

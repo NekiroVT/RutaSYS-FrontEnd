@@ -1,0 +1,277 @@
+/* ==================================== */
+/* 0. HOST (CONTENEDOR DEL COMPONENTE)  */
+/* ==================================== */
+:host {
+    font-family: 'Inter', sans-serif;
+    display: flex; 
+    height: 100%; 
+    
+    /* ⬅️ CLAVE 1: Ancho fijo y NO ENCOGERSE */
+    width: 280px; 
+    min-width: 280px; 
+    flex-shrink: 0;   
+    
+    box-sizing: border-box;
+}
+
+/* ==================================== */
+/* 1. CONTENEDOR PRINCIPAL DEL SIDEBAR  */
+/* ==================================== */
+.sidebar-container {
+    width: 100%; 
+    height: 100%; 
+    background-color: #121C21; 
+    padding: 20px 20px 20px 20px; 
+    display: flex;
+    flex-direction: column; 
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    box-sizing: border-box; 
+}
+
+/* ==================================== */
+/* 2. PERFIL */
+/* ==================================== */
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 20px;
+    /* Quitamos border-bottom para usar el separador explícito */
+    flex-shrink: 0; 
+}
+
+.profile-image {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 3px solid #24D47A; 
+}
+
+.user-name {
+    font-size: 1.4rem; 
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+}
+
+.user-role {
+    font-size: 0.85rem; 
+    color: #9EB0BA;
+    margin-top: 5px;
+}
+
+/* NUEVO: LÍNEA SEPARADORA */
+.separator {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.05);
+    margin: 0 0 25px 0; 
+    width: 100%;
+    flex-shrink: 0;
+}
+
+/* ==================================== */
+/* 3. ELEMENTOS DEL MENÚ (SCROLLABLE)   */
+/* ==================================== */
+.menu-list {
+    flex-grow: 1; 
+    overflow-y: auto; 
+    overflow-x: hidden;
+    scrollbar-gutter: stable; 
+    
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+    padding-right: 5px; 
+}
+
+/* SCROLLBAR PERSONALIZADO */
+.menu-list::-webkit-scrollbar {
+    width: 8px; 
+}
+.menu-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1); 
+    border-radius: 10px;
+}
+.menu-list::-webkit-scrollbar-thumb {
+    background: #49B8EF; 
+    border-radius: 10px;
+    border: 3px solid transparent; 
+    background-clip: padding-box; 
+}
+
+/* --- A. ESTILOS DEL MENÚ PRINCIPAL --- */
+.menu-item {
+    display: flex;
+    align-items: center; 
+    padding: 10px 0; 
+    text-decoration: none;
+    color: inherit;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.03); 
+}
+
+.icon-square {
+    width: 44px; 
+    height: 44px; 
+    background-color: #243D47; 
+    border-radius: 10px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px; 
+    flex-shrink: 0; 
+}
+
+.icon-square i {
+    font-size: 1.2rem; 
+    color: #ffffff; 
+}
+
+.text-group {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; 
+}
+
+.title {
+    font-size: 1rem; 
+    font-weight: 600;
+    color: #ffffff; 
+    margin-bottom: 2px; 
+}
+
+.description {
+    font-size: 0.8rem; 
+    color: #9EB0BA; 
+    line-height: 1.2;
+}
+
+
+/* --- B. ESTILOS PARA EL "MODO MÓDULO" (DISTINCIÓN ACTIVO/INACTIVO) --- */
+
+/* 1. Tarjeta de Cabecera */
+.module-header-card {
+    background-color: #17242B; 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px; 
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.module-header-card .icon-square {
+    margin-right: 0; 
+}
+
+.module-title {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* 2. Contenedor de las Sub-opciones */
+.sub-options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; 
+}
+
+/* 3. Botones tipo "Píldora" - ESTADO INACTIVO (OSCURO) */
+.sub-item-pill {
+    display: flex;
+    align-items: center;
+    
+    /* Fondo Oscuro (Apagado) */
+    background-color: #151E24; 
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    
+    color: #8B9DA8; /* Texto gris */
+    padding: 14px 20px;
+    border-radius: 12px; 
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.sub-item-pill:hover {
+    background-color: #1c262e; /* Un poco más claro al pasar el mouse */
+    color: #ffffff;
+}
+
+.sub-item-pill i {
+    margin-right: 15px;
+    color: #5F707A; /* Icono oscuro */
+    font-size: 1.1rem;
+    transition: color 0.2s ease;
+}
+
+/* 🔥 ESTADO ACTIVO (SE APLICA CUANDO LA RUTA COINCIDE) */
+.sub-item-pill.active-pill {
+    /* Fondo Azulado/Teal (Encendido) */
+    background-color: #243D47; 
+    border: 1px solid #2f4b57;
+    
+    color: #FFFFFF; /* Texto blanco brillante */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
+}
+
+.sub-item-pill.active-pill i {
+    color: #FFFFFF; /* Icono blanco */
+}
+
+
+/* ==================================== */
+/* 4. ACCIONES INFERIORES (FIJO) */
+/* ==================================== */
+.bottom-actions {
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 0; 
+    flex-shrink: 0; 
+}
+
+.bottom-link {
+    align-items: center;
+    padding: 10px 0;
+}
+
+.bottom-link .icon-square {
+    background-color: transparent; 
+    box-shadow: none;
+    margin-right: 10px;
+    width: 30px; 
+    height: 30px;
+}
+
+.bottom-link .icon-square i {
+    color: #ffffff; 
+    font-size: 1rem;
+}
+
+.bottom-link .title {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #ffffff;
+}
+
+.back-link .title {
+    color: #9EB0BA; 
+}
+.back-link:hover .title {
+    color: #ffffff;
+}

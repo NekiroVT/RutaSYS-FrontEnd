@@ -1,0 +1,254 @@
+/* ==================================== */
+/* 0. CORRECCIÓN DE FUENTE */
+/* ==================================== */
+:host {
+    font-family: 'Inter', sans-serif;
+    display: block;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+
+/* ==================================== */
+/* 1. Fondo de la Página */
+/* ==================================== */
+.login-page-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* 🟢 RUTA CORREGIDA DE TU IMAGEN DE FONDO */
+    background-image: url('../../../assets/InicioSesionFondo.png'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #171c22;
+}
+
+/* ==================================== */
+/* 2. Tarjeta (Borde con Degradado) */
+/* ==================================== */
+.login-card {
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+
+    /* 🟢 BORDES CON DEGRADADO (Técnica de background-clip) */
+    
+    /* 1. Define el grosor del borde haciéndolo transparente */
+    border: 2.5px solid transparent;
+    
+    /* 2. Define dos capas de fondo:
+       - Capa superior: El color de fondo oscuro de la tarjeta.
+       - Capa inferior: El degradado lineal que quieres para el borde. */
+    background-image: 
+        linear-gradient(#1A2B33, #1A2B33), /* Fondo oscuro */
+        linear-gradient(to bottom left, #24D47A, #49BAF0); /* Degradado del borde */
+    
+    /* 3. Indica que el origen del fondo es el borde */
+    background-origin: border-box;
+    
+    /* 4. Recorta las capas:
+       - La primera (fondo oscuro) se recorta al área de contenido (padding-box).
+       - La segunda (degradado) se recorta al área del borde (border-box).
+       Esto hace que el degradado solo se vea en el espacio del borde transparente. */
+    background-clip: padding-box, border-box;
+}
+
+/* ==================================== */
+/* 3. Textos e Icono del Carrito */
+/* ==================================== */
+.header-content h2 {
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    font-weight: 640;
+    letter-spacing: 2px; /* Prueba con 1px, 2px o 0.05em */
+}
+
+.header-content p {
+    color: #ffffff;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+/* ==================================== */
+/* 7. Animación de Mensaje de Error */
+/* ==================================== */
+
+/* Define la animación de "entrada" (Fade-In y caída leve) */
+@keyframes error-fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Aplica la animación solo cuando el elemento aparece */
+.error-msg {
+    animation: error-fade-in 1s ease-out forwards; /* 0.3s de duración */
+    margin-bottom: 2rem; 
+    /* El forwards asegura que se quede en el estado final (opacity: 1) */
+}
+
+/* Opcional: Estilo para el botón de carga */
+.login-button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+    background: linear-gradient(to right, #4CAF50, #90CAF9);
+}
+
+/* 3. Estilo específico del texto de error para que sea más visible (Opcional) */
+.error-msg p {
+    color: #ff6b6b; /* Un color de error más estándar */
+    font-weight: 500;
+}
+
+
+/* Texto "¿No tienes Cuenta? Regístrate" */
+.register-text {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  pointer-events: auto;       /* habilitado normal */
+  user-select: none;          /* no se puede seleccionar */
+}
+
+/* Durante la animación fade-out -> totalmente in-clickeable e intocable */
+.register-text.fade-out {
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none !important; /* 🔥 bloquea clicks e interacción siempre */
+  user-select: none !important;    /* bloquea selección */
+}
+
+
+/* Cuando no hay error -> vuelve suave */
+.register-text.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
+
+
+
+
+
+.truck-icon {
+    width: 80px; 
+    height: 80px; 
+    margin: 0 auto 1rem auto; 
+    background-image: url('../../../assets/car-skiping.png'); /* Asegúrate que esta ruta también sea correcta si la moviste */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* ==================================== */
+/* 4. Inputs */
+/* ==================================== */
+.input-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+    width: 100%;
+}
+
+.input-field {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: #1C2126;
+    border: 1px solid #3B4454;
+    border-radius: 0.5rem;
+    color: #E0E0E0;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    font-family: 'Inter', sans-serif;
+}
+
+.input-field::placeholder { color: #8A8A8A; }
+
+.input-field:focus {
+    border-color: #3ef2c1;
+    outline: none;
+}
+
+.password-group .input-field { padding-right: 3rem; }
+
+.password-toggle {
+    position: absolute;
+    top: 50%; right: 1rem;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 1rem;
+    font-family: "Font Awesome 6 Free", sans-serif; 
+}
+
+.password-toggle:hover { color: #E0E0E0; }
+
+/* ==================================== */
+/* 5. Botón */
+/* ==================================== */
+.login-button {
+    width: 100%;
+    padding: 0.65rem;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    color: white;
+    /* El mismo degradado que el borde para que combine */
+    background: linear-gradient(to right, #24D47A, #49BAF1);
+    transition: opacity 0.3s, transform 0.1s;
+    font-family: 'Inter', sans-serif;
+}
+
+.login-button:hover { opacity: 0.9; }
+.login-button:active { transform: scale(0.98); }
+
+/* ==================================== */
+/* 6. Footer Links */
+/* ==================================== */
+.footer-links {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: #A0A0A0;
+}
+
+.footer-links p { margin: 0.5rem 0; }
+
+.link-register, .link-recover {
+    color: #3971E9;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.link-register:hover, .link-recover:hover {
+    color: #26c0d6;
+    text-decoration: none;
+}

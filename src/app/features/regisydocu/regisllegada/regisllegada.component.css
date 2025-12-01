@@ -1,0 +1,125 @@
+/* Contenedor principal */
+.registro-container {
+    width: 100%;
+    /* ⬅️ CAMBIO: Eliminamos max-width y margin auto del padre para controlar alineaciones individuales */
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+}
+
+/* --- Encabezado (AL MEDIO) --- */
+.header-section {
+    text-align: center; /* Centrado */
+    margin-bottom: 3rem;
+    width: 100%;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #9EB0BA;
+    margin: 0;
+}
+
+/* --- Formulario --- */
+.form-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; 
+}
+
+/* ⬅️ CAMBIO: Inputs a la IZQUIERDA (AL INICIO) */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: flex-start;
+    
+    /* Control de ancho y posición */
+    width: 100%;
+    /* ⬇️ AQUÍ ES DONDE CAMBIAS EL ANCHO DE LOS INPUTS */
+    max-width: 450px; /* Reducido de 600px a 450px */
+    margin-right: auto; /* Empuja todo el espacio sobrante a la derecha */
+    margin-left: 0;     /* Se pega a la izquierda */
+}
+
+.input-group label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+/* Wrapper para el input y el icono */
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%; 
+}
+
+.input-wrapper input {
+    width: 100%;
+    background-color: #232d36; 
+    border: 1px solid #2f3b46;
+    border-radius: 8px;
+    padding: 1rem 3rem 1rem 1rem; /* Espacio para icono a la derecha */
+    color: #cbd5e1;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+    text-align: left; 
+}
+
+.input-wrapper input:focus {
+    border-color: #49B8EF;
+}
+
+/* Icono dentro del input (A la derecha, como en la imagen) */
+.input-wrapper .icon {
+    position: absolute;
+    right: 1.2rem; 
+    left: auto;
+    color: #ffffff; 
+    font-size: 1.2rem;
+    pointer-events: none; 
+}
+
+/* --- Botón (AL MEDIO) --- */
+.btn-registrar {
+    /* ⬅️ CAMBIO: El botón sí va centrado */
+    margin: 1rem auto; /* Auto en los lados lo centra */
+    
+    width: 100%; 
+    max-width: 600px; /* Mismo ancho máximo que los inputs para consistencia visual */
+    
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    cursor: pointer;
+    
+    background: linear-gradient(90deg, #22c1c3 0%, #46aef7 100%);
+    box-shadow: 0 4px 15px rgba(34, 193, 195, 0.3);
+    
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-registrar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(34, 193, 195, 0.4);
+}
+
+.btn-registrar:active {
+    transform: translateY(0);
+}

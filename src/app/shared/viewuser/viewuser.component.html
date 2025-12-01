@@ -1,0 +1,29 @@
+<div class="view-usuario-page-container">
+    
+    <!-- La tarjeta principal que actúa como contenedor de contenido -->
+    <div class="view-usuario-card">
+        
+        <!-- Sidebar: Se mantiene igual, recibiendo los datos del perfil -->
+        <app-sidebar 
+          [userName]="profileName"
+          [userRole]="profileRole"
+          [profileImageUrl]="profileImageUrl">
+        </app-sidebar> 
+
+        <!-- Área de Contenido Principal (Columna Derecha) -->
+        <div class="main-content-area">
+            
+            <!-- 
+               🚀 CAMBIO CLAVE:
+               Quitamos el HTML fijo de bienvenida.
+               El <router-outlet> cargará el componente hijo correspondiente:
+               - Si la ruta es '/viewuser' -> Carga WelcomeComponent
+               - Si la ruta es '/viewuser/documentacion' -> Carga RegisydocuComponent
+            -->
+            <router-outlet></router-outlet>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,291 @@
+/* ==================================== */
+/* 0. FUENTE Y RESET                    */
+/* ==================================== */
+:host {
+    font-family: 'Inter', sans-serif;
+    display: block;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* ==================================== */
+/* 1. Fondo de la Página (CON OVERLAY) */
+/* ==================================== */
+.modules-page-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Fondo original */
+    background-image: url('../../../assets/InicioSesionFondo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #171c22;
+    
+    /* Configuración de contexto para el pseudo-elemento */
+    position: relative;
+    z-index: 1; 
+}
+
+/* Capa de superposición (Overlay) semi-transparente */
+.modules-page-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Color gris oscuro semi-transparente */
+    background-color: rgba(10, 15, 20, 0.619); 
+    
+    z-index: 2; 
+}
+
+
+/* ==================================== */
+/* 2. Tarjeta Principal (Glass + Borde Degradado) */
+/* ==================================== */
+.modules-card {
+    padding: 2.2rem 5rem;
+    border-radius: 1rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    width: 100%;
+    max-width: 1200px;
+    min-height: 650px; 
+    max-height: 90vh; 
+
+    backdrop-filter: blur(5px);
+
+    border: 2.5px solid transparent;
+    background-image:
+        linear-gradient(#1A2B33, #1A2B33),
+        linear-gradient(to bottom left, #1A2B33, #1A2B33);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+
+    color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+    
+    position: relative; 
+    z-index: 3; 
+}
+
+
+/* ==================================== */
+/* 3. HEADER - Título RUTASYS */
+/* ==================================== */
+.rutasys-header {
+    background: linear-gradient(90deg, #24D47A, #3681A5);
+    padding: 1.8rem 0;
+    margin-bottom: 2rem;
+    border-radius: 0.6rem;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.rutasys-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin: 0;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+/* ==================================== */
+/* 4. GRID DE CARDS DE USUARIO          */
+/* ==================================== */
+.users-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2.5rem;
+    
+    overflow-y: auto; 
+    flex-grow: 1; 
+    
+    scrollbar-gutter: stable; 
+
+    /* === ESTILOS PARA LA BARRA DE SCROLL PERSONALIZADA === */
+    /* 1. Ancho de la barra de scroll */
+    &::-webkit-scrollbar {
+        width: 8px; 
+    }
+
+    /* 2. Fondo de la barra de scroll (track) */
+    &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1); 
+        border-radius: 10px;
+    }
+
+    /* 3. El "thumb" (la parte que se arrastra) */
+    &::-webkit-scrollbar-thumb {
+        background: #49B8EF; 
+        border-radius: 10px;
+        border: 3px solid transparent; 
+        background-clip: padding-box; 
+    }
+    
+    /* === 💡 SOLUCIÓN: UN SOLO ELEMENTO === */
+    /* Cuando solo hay una tarjeta, la centramos y limitamos su ancho */
+    & > .user-item-wrapper:only-child {
+        max-width: 250px; /* Ancho máximo para la tarjeta única */
+        width: 100%;
+        margin: 0 auto; /* Centrar horizontalmente */
+    }
+}
+
+/* Contenedor para agrupar Card y Botón (Una sola unidad en la cuadrícula) */
+.user-item-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Primer Cuadrado: Card de Información (Foto, Nombre, Rol) */
+.user-card {
+    background: linear-gradient(to bottom left, #24D47A, #3681A5);
+    border-radius: 0.7rem;
+    border: 1.7px solid #578554;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    
+    min-height: 250px; 
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Imagen de Usuario */
+.user-avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.5rem; 
+    border: 1.5px solid #578554;
+}
+
+/* Nombre del Usuario */
+.user-card h3 {
+    margin: 0 0 0.3rem 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    flex-grow: 1; 
+}
+
+/* Rol del Usuario */
+.user-card p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #9EB0BA;
+    margin-top: auto; 
+}
+
+/* Segundo Cuadrado: Botón Ingresar (Separado de user-card) */
+.btn-ingresar {
+    width: 100%;
+    padding: 0.40rem;
+    border: 1.7px solid #1923DF;
+    border-radius: 0.6rem;
+    font-weight: 600;
+    background: linear-gradient(90deg, #49B8EF, #3F8884);
+    color: #ffffff;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+    cursor: pointer;
+    transition: transform 0.2s ease-out, background 0.2s;
+}
+
+/* Efecto hover solo para el botón */
+.btn-ingresar:hover {
+    transform: translateY(-5px);
+}
+
+/* Efecto de presión */
+.btn-ingresar:active {
+    transform: scale(0.98);
+}
+
+
+/* ==================================== */
+/* 5. FOOTER (Ayuda / Cerrar Sesión)    */
+/* ==================================== */
+.modules-footer {
+    display: flex;
+    justify-content: center;
+    gap: 10rem;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 1.5rem;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+    color: #cccccc;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.footer-link:hover {
+    color: #49BAF0;
+}
+
+.footer-link i {
+    margin-right: 0.4rem;
+    font-size: 1rem;
+}
+
+/* Estilo para el texto "basura" de la parte inferior */
+.debug-text {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.6rem;
+    color: #ffffff;
+    flex-shrink: 0;
+}
+
+/* ==================================== */
+/* 6. RESPONSIVE                        */
+/* ==================================== */
+@media (max-width: 768px) {
+    .modules-card {
+        margin: 0 1rem;
+        padding: 1.6rem;
+        max-height: 95vh;
+    }
+
+    .rutasys-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .users-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+    
+    .modules-footer {
+        gap: 2rem; 
+    }
+    
+    /* 💡 RESPONSIVE: Ajuste para un solo elemento en móvil */
+    .users-grid > .user-item-wrapper:only-child {
+        /* En móvil, el max-width puede ser un poco más pequeño o dejar que el grid lo maneje */
+        max-width: 300px; 
+        margin: 0 auto; 
+    }
+}

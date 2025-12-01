@@ -1,0 +1,43 @@
+<div class="login-page-container">
+  <form (ngSubmit)="iniciarSesion()" class="login-card">
+
+    <div class="header-content">
+      <div class="truck-icon"></div>
+      <h2>Bienvenido</h2>
+      <p>Ingrese sus credenciales para continuar</p>
+    </div>
+
+    <div *ngIf="errorMsg" class="error-msg">
+      <p>{{ errorMsg }}</p>
+    </div>
+
+    <div class="input-group">
+      <input type="text" placeholder="Usuario" [(ngModel)]="usuario" name="usuario" required class="input-field">
+    </div>
+
+    <div class="input-group password-group">
+      <input [type]="showPassword ? 'text' : 'password'" placeholder="Contraseña" [(ngModel)]="contrasena"
+        name="contrasena" required class="input-field">
+      <span class="password-toggle" (click)="toggleShowPassword()">
+        <i *ngIf="showPassword" class="fa-solid fa-eye"></i>
+        <i *ngIf="!showPassword" class="fa-solid fa-eye-slash"></i>
+      </span>
+    </div>
+
+    <button type="submit" class="login-button">Iniciar sesión</button>
+
+    <div class="footer-links">
+      <p class="register-text" [class.fade-out]="mostrarContenidoError" [class.fade-in]="!mostrarContenidoError">
+        ¿No tienes Cuenta?
+        <a routerLink="/register" class="link-register">Regístrate</a>
+      </p>
+
+      <p>
+        ¿Has olvidado la contraseña?
+        <a routerLink="/recover" class="link-recover">Recuperar</a>
+      </p>
+    </div>
+
+
+  </form>
+</div>

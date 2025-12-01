@@ -1,0 +1,37 @@
+<div class="registro-container">
+    
+    <!-- Encabezado -->
+    <div class="header-section">
+        <h2 class="title">Registro de Llegada del Chofer</h2>
+        <p class="subtitle">Registra tu llegada al almacen por favor .</p>
+    </div>
+
+    <!-- Formulario -->
+    <div class="form-section">
+        
+        <!-- Campo: Ubicación -->
+        <div class="input-group">
+            <label>Ubicación (Auto-detectada)</label>
+            <div class="input-wrapper">
+                <input type="text" [value]="ubicacionActual" readonly>
+                <i class="fa-solid fa-location-dot icon"></i>
+            </div>
+        </div>
+
+        <!-- Campo: Fecha y Hora -->
+        <div class="input-group">
+            <label>Fecha y Hora (Auto-detectadas)</label>
+            <div class="input-wrapper">
+                <input type="text" [value]="fechaHoraActual" readonly>
+                <i class="fa-regular fa-calendar icon"></i>
+            </div>
+        </div>
+
+        <!-- Botón de Acción -->
+        <button class="btn-registrar" (click)="registrarLlegada()">
+            Registrar llegada
+        </button>
+
+    </div>
+
+</div>
