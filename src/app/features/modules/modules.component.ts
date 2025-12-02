@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router'; // Se quitó RouterLink de aquí
 import { ModulesDataService } from '../../core/services/modules.service';
 import { AuthService } from '../../core/services/auth.service'; // Necesario para cerrar sesión
 
@@ -35,7 +35,8 @@ interface UserView {
 @Component({
     selector: 'app-modules',
     standalone: true, 
-    imports: [CommonModule, RouterLink], 
+    // ¡CORREGIDO! RouterLink ya no es necesario aquí.
+    imports: [CommonModule], 
     templateUrl: './modules.component.html', // ⬅️ Ahora apunta al archivo HTML
     styleUrls: ['./modules.component.css']   // ⬅️ Ahora apunta al archivo CSS
 })

@@ -86,7 +86,7 @@
     min-width: 0; 
     
     /* Padding para dar aire al contenido dinámico */
-    padding: 3rem; 
+    padding: 2rem; 
     /* Aseguramos que el contenido pueda scrollear independientemente */
     overflow-y: auto; 
     

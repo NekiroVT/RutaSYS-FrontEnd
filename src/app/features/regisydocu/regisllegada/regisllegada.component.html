@@ -1,37 +1,92 @@
 <div class="registro-container">
-    
-    <!-- Encabezado -->
-    <div class="header-section">
-        <h2 class="title">Registro de Llegada del Chofer</h2>
-        <p class="subtitle">Registra tu llegada al almacen por favor .</p>
-    </div>
 
-    <!-- Formulario -->
-    <div class="form-section">
-        
-        <!-- Campo: Ubicación -->
-        <div class="input-group">
-            <label>Ubicación (Auto-detectada)</label>
-            <div class="input-wrapper">
-                <input type="text" [value]="ubicacionActual" readonly>
-                <i class="fa-solid fa-location-dot icon"></i>
+    <div *ngIf="isRegistered" class="success-screen-section">
+        <div class="header-section">
+            <h2 class="title success-title">¡Llegada registrada!</h2>
+            <p class="subtitle success-subtitle">Tu llegada al almacén ha sido registrada con éxito. La siguiente etapa del proceso está ahora habilitada.</p>
+        </div>
+
+        <div class="details-section">
+            <h3 class="details-title">Detalles de la llegada</h3>
+            <hr>
+            
+            <div class="detail-row">
+                <span class="detail-label">Nombre del chofer</span>
+                <span class="detail-value">{{ choferName }}</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="detail-label">Ubicación</span>
+                <span class="detail-value">{{ ubicacionRegistrada || 'Almacén Central, Calle Principal 123' }}</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="detail-label">Fecha y hora</span>
+                <span class="detail-value">{{ fechaHoraRegistrada || '25/05/2025 - 14:32' }}</span>
             </div>
         </div>
 
-        <!-- Campo: Fecha y Hora -->
-        <div class="input-group">
-            <label>Fecha y Hora (Auto-detectadas)</label>
-            <div class="input-wrapper">
-                <input type="text" [value]="fechaHoraActual" readonly>
-                <i class="fa-regular fa-calendar icon"></i>
-            </div>
+        <div class="success-buttons-group">
+            <button class="btn-continuar" (click)="goToDashboard()">
+                continuar
+            </button>
+            <button class="btn-volver" (click)="goToDashboard()">
+                volver
+            </button>
         </div>
-
-        <!-- Botón de Acción -->
-        <button class="btn-registrar" (click)="registrarLlegada()">
-            Registrar llegada
-        </button>
-
     </div>
 
+
+    <div *ngIf="!isRegistered" class="form-view-section">
+
+        <div class="header-section">
+            <h2 class="title">Registro de Llegada del Chofer</h2>
+            <p class="subtitle">Registra tu llegada al almacén, por favor.</p>
+        </div>
+
+        <div *ngIf="successMessage" class="message-box success-box">
+            <i class="fa-solid fa-check-circle"></i>
+            <p>{{ successMessage }}</p>
+        </div>
+
+        <div *ngIf="errorMessage" class="message-box error-box">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <p>{{ errorMessage }}</p>
+        </div>
+
+        <div class="form-section">
+
+            <div class="input-group">
+                <label>Ubicación (Auto-detectada)</label>
+                <div class="input-wrapper">
+                    <input type="text" [value]="ubicacionActual" readonly
+                        [class.is-error]="ubicacionActual.startsWith('Error')">
+                    <i class="fa-solid fa-location-dot icon"></i>
+                </div>
+            </div>
+
+            <div class="debug-text" *ngIf="latitud !== 0">
+                <small>GPS: Lat: {{ latitud.toFixed(6) }}, Lon: {{ longitud.toFixed(6) }}</small>
+            </div>
+
+            <div class="input-group">
+                <label>Fecha y Hora (Auto-detectadas)</label>
+                <div class="input-wrapper">
+                    <input type="text" [value]="fechaHoraActual" readonly>
+                    <i class="fa-regular fa-calendar icon"></i>
+                </div>
+            </div>
+
+            <button class="btn-registrar" (click)="registrarLlegada()"
+                [disabled]="isSubmitting || ubicacionActual.startsWith('Error')">
+
+                <span *ngIf="!isSubmitting">
+                    Registrar llegada
+                </span>
+                <span *ngIf="isSubmitting">
+                    <i class="fa-solid fa-spinner fa-spin"></i> Registrando...
+                </span>
+            </button>
+        </div>
+    </div>
 </div>

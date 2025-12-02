@@ -1,17 +1,21 @@
 /* Contenedor principal */
+
 .registro-container {
     width: 100%;
     /* ⬅️ CAMBIO: Eliminamos max-width y margin auto del padre para controlar alineaciones individuales */
-    padding-top: 2rem;
+    padding-top: 0rem;
     display: flex;
     flex-direction: column;
     color: #ffffff;
     font-family: 'Inter', sans-serif;
+    min-height: 100vh; /* Para que el fondo sea oscuro en todo el viewport */
+    background-color: #121212; /* Fondo oscuro */
 }
 
 /* --- Encabezado (AL MEDIO) --- */
 .header-section {
-    text-align: center; /* Centrado */
+    text-align: center;
+    /* Centrado */
     margin-bottom: 3rem;
     width: 100%;
 }
@@ -19,7 +23,7 @@
 .title {
     font-size: 2rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin: 0; /* ✅ Ahora: Quita todo el margen (arriba, abajo, lados) */
     color: #ffffff;
 }
 
@@ -27,14 +31,61 @@
     font-size: 1rem;
     color: #9EB0BA;
     margin: 0;
+    padding: 0 1rem; /* Pequeño padding para evitar que se pegue a los bordes en móvil */
 }
+
+/* 🚀 SOLUCIÓN FINAL SIMPLE: Mensajes de Estado (Solo texto y color) */
+.message-box {
+    /* 1. Flexbox para alinear el ícono y el párrafo en una línea */
+    display: flex; 
+    align-items: center; /* Alineación vertical */
+    gap: 0.5rem; /* Pequeño espacio entre ícono y texto */
+    
+    /* 2. Alineación simple con tus inputs (izquierda, 450px) */
+    width: 100%;
+    max-width: 450px; 
+    margin-left: 0; 
+    margin-right: auto; 
+    margin-bottom: 1.5rem; /* Espacio antes del formulario */
+    
+    /* 3. Eliminación de todos los estilos de "caja" (fondo, padding, borde) */
+    background: none; 
+    padding: 0; 
+    border-radius: 0;
+    font-weight: 400; /* Fuente normal */
+    font-size: 1rem;
+}
+
+/* Color para el mensaje de Éxito */
+.success-box {
+    color: #4CAF50; /* Verde de éxito */
+}
+
+/* Color para el mensaje de Error */
+.error-box {
+    color: #F44336; /* Rojo de error */
+}
+
+/* Evita que el párrafo tenga márgenes que fuercen un salto de línea */
+.message-box p {
+    margin: 0; 
+}
+
+/* Estilo para el ícono dentro del mensaje */
+.message-box i {
+    font-size: 1rem; /* Tamaño simple */
+    flex-shrink: 0;
+}
+
+/* ---------------------------------------------------- */
+
 
 /* --- Formulario --- */
 .form-section {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 2rem; 
+    gap: 2rem;
 }
 
 /* ⬅️ CAMBIO: Inputs a la IZQUIERDA (AL INICIO) */
@@ -43,13 +94,16 @@
     flex-direction: column;
     gap: 0.8rem;
     align-items: flex-start;
-    
+
     /* Control de ancho y posición */
     width: 100%;
-    /* ⬇️ AQUÍ ES DONDE CAMBIAS EL ANCHO DE LOS INPUTS */
-    max-width: 450px; /* Reducido de 600px a 450px */
-    margin-right: auto; /* Empuja todo el espacio sobrante a la derecha */
-    margin-left: 0;     /* Se pega a la izquierda */
+    /* ⬇️ ANCHO DE LOS INPUTS */
+    max-width: 450px;
+    /* Reducido de 600px a 450px */
+    margin-right: auto;
+    /* Empuja todo el espacio sobrante a la derecha */
+    margin-left: 0;
+    /* Se pega a la izquierda */
 }
 
 .input-group label {
@@ -63,20 +117,26 @@
     position: relative;
     display: flex;
     align-items: center;
-    width: 100%; 
+    width: 100%;
 }
 
 .input-wrapper input {
     width: 100%;
-    background-color: #232d36; 
+    background-color: #232d36;
     border: 1px solid #2f3b46;
     border-radius: 8px;
-    padding: 1rem 3rem 1rem 1rem; /* Espacio para icono a la derecha */
+    padding: 1rem 3rem 1rem 1rem;
+    /* Espacio para icono a la derecha */
     color: #cbd5e1;
     font-size: 1rem;
     outline: none;
     transition: border-color 0.3s;
-    text-align: left; 
+    text-align: left;
+}
+
+.input-wrapper input.is-error {
+    border-color: #e53e3e;
+    /* Rojo para errores en el input de ubicación */
 }
 
 .input-wrapper input:focus {
@@ -86,21 +146,35 @@
 /* Icono dentro del input (A la derecha, como en la imagen) */
 .input-wrapper .icon {
     position: absolute;
-    right: 1.2rem; 
+    right: 1.2rem;
     left: auto;
-    color: #ffffff; 
+    color: #ffffff;
     font-size: 1.2rem;
-    pointer-events: none; 
+    pointer-events: none;
 }
+
+/* Campo de debug */
+.debug-text {
+    width: 100%;
+    max-width: 450px;
+    margin-left: 0;
+    margin-right: auto;
+    color: #9EB0BA;
+    text-align: left;
+    font-size: 0.8rem;
+}
+
 
 /* --- Botón (AL MEDIO) --- */
 .btn-registrar {
     /* ⬅️ CAMBIO: El botón sí va centrado */
-    margin: 1rem auto; /* Auto en los lados lo centra */
-    
-    width: 100%; 
-    max-width: 600px; /* Mismo ancho máximo que los inputs para consistencia visual */
-    
+    margin: 1rem auto;
+    /* Auto en los lados lo centra */
+
+    width: 100%;
+    max-width: 450px;
+    /* Ajustado a 450px para consistencia con inputs */
+
     padding: 1rem;
     border: none;
     border-radius: 8px;
@@ -108,18 +182,129 @@
     font-weight: 700;
     color: #ffffff;
     cursor: pointer;
-    
+
     background: linear-gradient(90deg, #22c1c3 0%, #46aef7 100%);
     box-shadow: 0 4px 15px rgba(34, 193, 195, 0.3);
-    
+
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.btn-registrar:hover {
+.btn-registrar:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(34, 193, 195, 0.4);
 }
 
-.btn-registrar:active {
+.btn-registrar:active:not(:disabled) {
     transform: translateY(0);
+}
+
+.btn-registrar:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #5A6978;
+    box-shadow: none;
+}
+
+/* ---------------------------------------------------- */
+/* 🚀 ESTILOS PANTALLA DE ÉXITO (Simulando la imagen) */
+/* ---------------------------------------------------- */
+
+.success-screen-section {
+    width: 100%;
+    /* Mantiene el centrado vertical y horizontal del header por defecto */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contenido horizontalmente */
+    padding: 2rem;
+}
+
+.success-title {
+    color: #60D9B9; /* Verde más brillante o cian para el título principal */
+}
+
+.success-subtitle {
+    margin-bottom: 2rem;
+    max-width: 600px; /* Ancho máximo para el texto */
+}
+
+/* Sección de Detalles */
+.details-section {
+    width: 100%;
+    max-width: 600px; /* Ancho de la caja de detalles */
+    margin: 0 auto 3rem auto;
+    text-align: left;
+}
+
+.details-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.details-section hr {
+    border: none;
+    border-top: 1px solid #2f3b46; /* Separador */
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.detail-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Columna de etiqueta y columna de valor */
+    gap: 1rem;
+    padding: 0.5rem 0;
+}
+
+.detail-label {
+    font-size: 0.9rem;
+    color: #9EB0BA;
+}
+
+.detail-value {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+/* Grupo de Botones */
+.success-buttons-group {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    max-width: 600px; /* Mismo ancho que la sección de detalles */
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.btn-continuar {
+    flex-grow: 1;
+    max-width: 280px;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    cursor: pointer;
+    background: linear-gradient(90deg, #22c1c3 0%, #46aef7 100%);
+    transition: opacity 0.3s;
+}
+
+.btn-volver {
+    flex-grow: 1;
+    max-width: 280px;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    cursor: pointer;
+    background-color: #2f3b46;
+    transition: opacity 0.3s;
+}
+
+.btn-continuar:hover, .btn-volver:hover {
+    opacity: 0.9;
 }
